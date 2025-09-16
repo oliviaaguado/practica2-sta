@@ -1,0 +1,30 @@
+- Buscar una película:
+GET, https://nuestraAPI/peliculas/:id
+	Ejemplo: https://nuestraAPI/peliculas/1
+
+- Crear una película:
+POST, https://nuestraAPI/peliculas
+
+- Borrar una película:
+DELETE, https://nuestraAPI/peliculas/:id
+
+- Modificar una película:
+POST, https://nuestraAPI/peliculas/:id
+
+| Acción                   | Método HTTP | Endpoint                          | Parámetros / Body             | Descripción                   |
+| ------------------------ | ----------- | --------------------------------- | ----------------------------- | ----------------------------- |
+| Buscar una película      | GET         | /peliculas/\:id                   | id de la película             | Devuelve datos de la película |
+| Crear una película       | POST        | /peliculas                        | JSON con nombre, año, actores | Añade una película nueva      |
+| Borrar una película      | DELETE      | /peliculas/\:id                   | id de la película             | Borra una película            |
+| Modificar película       | PUT/PATCH   | /peliculas/\:id                   | JSON con campos a cambiar     | Cambia nombre, año o actores  |
+| Añadir actor a película  | POST        | /peliculas/\:id/actores           | id del actor                  | Añade un actor a la película  |
+| Quitar actor de película | DELETE      | /peliculas/\:id/actores/\:actorId | id del actor                  | Quita un actor de la película |
+
+
+
+| Acción          | Método HTTP | Endpoint      | Parámetros / Body    | Descripción              |
+| --------------- | ----------- | ------------- | -------------------- | ------------------------ |
+| Crear actor     | POST        | /actores      | JSON con nombre, año | Añade un actor nuevo     |
+| Borrar actor    | DELETE      | /actores/\:id | id del actor         | Borra un actor           |
+| Modificar actor | PUT/PATCH   | /actores/\:id | JSON con nombre, año | Cambia nombre o año      |
+| Buscar actor    | GET         | /actores/\:id | id del actor         | Devuelve datos del actor |
