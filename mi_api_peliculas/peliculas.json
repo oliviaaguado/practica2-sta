@@ -1,0 +1,26 @@
+[
+  {
+    "id": "p_001",
+    "nombre": "Grease",
+    "anioPublicacion": 1978,
+    "actores": ["a_001", "a_002"]  
+  },
+  {
+    "id": "p_002",
+    "nombre": "Matrix",
+    "anioPublicacion": 1999,
+    "actores": ["a_003", "a_004"]
+  },
+  {
+    "id": "p_003",
+    "nombre": "Terminator",
+    "anioPublicacion": 1984,
+    "actores": ["a_005", "a_006"]
+  },
+  {
+    "id": "p_004",
+    "nombre": "Titanic",
+    "anioPublicacion": 1997,
+    "actores": ["a_007", "a_008"]
+  }
+]

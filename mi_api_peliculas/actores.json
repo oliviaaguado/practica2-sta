@@ -1,0 +1,44 @@
+{
+  "actores": [
+    {
+      "id": "a_001",
+      "nombre": "John Travolta",
+      "nacimiento": 1954
+    },
+    {
+      "id": "a_002",
+      "nombre": "Olivia Newton-John",
+      "nacimiento": 1948
+    },
+    {
+      "id": "a_003",
+      "nombre": "Keanu Reeves",
+      "nacimiento": 1964
+    },
+    {
+      "id": "a_004",
+      "nombre": "Carrie-Anne Moss",
+      "nacimiento": 1967
+    },
+    {
+      "id": "a_005",
+      "nombre": "Arnold Schwarzenegger",
+      "nacimiento": 1947
+    },
+    {
+      "id": "a_006",
+      "nombre": "Linda Hamilton",
+      "nacimiento": 1956
+    },
+    {
+      "id": "a_007",
+      "nombre": "Leonardo DiCaprio",
+      "nacimiento": 1974
+    },
+    {
+      "id": "a_008",
+      "nombre": "Kate Winslet",
+      "nacimiento": 1975
+    }
+  ]
+}
