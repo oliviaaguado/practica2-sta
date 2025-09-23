@@ -1,0 +1,59 @@
+📌 Actores
+1. Listar todos los actores
+curl http://localhost:3000/actores
+
+2. Ver un actor concreto
+curl http://localhost:3000/actores/a_001
+
+3. Crear un actor nuevo
+curl -X POST http://localhost:3000/actores \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Laurence Fishburne","nacimiento":1961}'
+
+4. Modificar un actor existente (ej. cambiar nombre)
+curl -X PATCH http://localhost:3000/actores/a_003 \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Keanu Charles Reeves"}'
+
+5. Borrar un actor
+curl -X DELETE http://localhost:3000/actores/a_008
+
+🎬 Películas
+6. Listar todas las películas
+curl http://localhost:3000/peliculas
+
+7. Buscar películas por nombre
+curl "http://localhost:3000/peliculas?nombre=Matrix"
+
+8. Buscar películas por año
+curl "http://localhost:3000/peliculas?anioPublicacion=1997"
+
+9. Ver una película concreta
+curl http://localhost:3000/peliculas/p_002
+
+10. Crear una nueva película
+curl -X POST http://localhost:3000/peliculas \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Avatar","anioPublicacion":2009,"actores":[]}'
+
+11. Modificar una película existente (ej. cambiar año)
+curl -X PATCH http://localhost:3000/peliculas/p_001 \
+  -H "Content-Type: application/json" \
+  -d '{"anioPublicacion":1979}'
+
+12. Añadir un actor a una película
+
+(Supongamos que a_003 es Keanu Reeves y queremos añadirlo a Titanic p_004)
+
+curl -X POST http://localhost:3000/peliculas/p_004/actores \
+  -H "Content-Type: application/json" \
+  -d '{"actorId":"a_003"}'
+
+13. Quitar un actor de una película
+
+(Quitar Leonardo DiCaprio a_007 de Titanic p_004)
+
+curl -X DELETE http://localhost:3000/peliculas/p_004/actores/a_007
+
+14. Borrar una película
+curl -X DELETE http://localhost:3000/peliculas/p_003
