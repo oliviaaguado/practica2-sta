@@ -36,7 +36,7 @@ app.get("/actores", async (req, res) => {
   res.json(db.actores);                     // Devolvemos el array de actores como JSON
 });
 
-// GET /actores/:id → devuelve un actor concreto por su id
+// GET /actores/:id → devuelve un actor concreto por su id  (a_00x)
 app.get("/actores/:id", async (req, res) => {
   const db = await leerJSON(ACTORES_PATH);
   const actor = db.actores.find(a => a.id === req.params.id); // Buscamos por id en la lista
@@ -45,6 +45,7 @@ app.get("/actores/:id", async (req, res) => {
 });
 
 // POST /actores → crea un nuevo actor
+// Ejemplo de Body que hay que introducir: { "nombre": "Keanu Reeves", "nacimiento": 1964 }
 app.post("/actores", async (req, res) => {
   const { nombre, nacimiento } = req.body || {};  // Extraemos campos del body
   if (!nombre || !Number.isInteger(nacimiento)) {
@@ -59,9 +60,10 @@ app.post("/actores", async (req, res) => {
 });
 
 // PATCH /actores/:id → modifica campos de un actor (parcialmente)
+// Ejemplo de Body que hay que introducir: { "nombre": "Keanu Reeves", "nacimiento": 1964 }
 app.patch("/actores/:id", async (req, res) => {
-  const db = await leerJSON(ACTORES_PATH);
-  const actor = db.actores.find(a => a.id === req.params.id);
+  const db = await leerJSON(ACTORES_PATH);          // Abrimos el fichero actores.json
+  const actor = db.actores.find(a => a.id === req.params.id); // Buscamos el actor correspondiente al id introducido
   if (!actor) return res.status(404).json({ error: "Actor no encontrado" });
 
   const { nombre, nacimiento } = req.body || {};
@@ -120,6 +122,12 @@ app.get("/peliculas/:id", async (req, res) => {
 });
 
 // POST /peliculas → crea una nueva película
+// Ejemplo de body: {
+//  "nombre": "John Wick",
+//  "anioPublicacion": 2014,
+//  "actores": ["a_001","a_002"]   // opcional; si no se manda, se usa []
+//}
+
 app.post("/peliculas", async (req, res) => {
   const { nombre, anioPublicacion, actores } = req.body || {};
   if (!nombre || !Number.isInteger(anioPublicacion)) {
@@ -134,6 +142,7 @@ app.post("/peliculas", async (req, res) => {
 });
 
 // PATCH /peliculas/:id → modifica una película
+// Ejemplo de body: { "nombre": "Nuevo Título", "anioPublicacion": 2020 }
 app.patch("/peliculas/:id", async (req, res) => {
   const db = await leerJSON(PELIS_PATH);
   const peli = db.peliculas.find(p => p.id === req.params.id);
@@ -150,6 +159,7 @@ app.patch("/peliculas/:id", async (req, res) => {
 });
 
 // POST /peliculas/:id/actores → añade un actor a la película
+// No crea el actor, añade un actor ya 'registrado'
 app.post("/peliculas/:id/actores", async (req, res) => {
   const { actorId } = req.body || {};
   if (!actorId) return res.status(400).json({ error: "actorId requerido" });
