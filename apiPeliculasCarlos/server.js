@@ -14,6 +14,7 @@ app.use(express.json());    // Convierte automáticamente el body en JSON → re
 // Definimos las rutas de los archivos de datos
 const ACTORES_PATH = path.join(__dirname, "data", "actores.json");
 const PELIS_PATH   = path.join(__dirname, "data", "peliculas.json");
+const CONTADORES_PATH = path.join(__dirname,"data", "contadores.json");
 
 // Funciones auxiliares para leer/escribir los ficheros JSON
 async function leerJSON(ruta) {
@@ -23,9 +24,18 @@ async function leerJSON(ruta) {
 async function escribirJSON(ruta, obj) {
   await fs.writeFile(ruta, JSON.stringify(obj, null, 2), "utf8"); // Guardar con sangría bonita
 }
-function nuevoId(prefijo) {
-  // Crea un id aleatorio tipo "a_xxxxx" o "p_xxxxx"
-  return `${prefijo}_${Math.random().toString(36).slice(2, 8)}`;
+async function nuevoIdActor() {
+  const counters = await leerJSON(CONTADORES_PATH);
+  counters.UltimoIDActor += 1;   // Incrementa contador
+  await escribirJSON(CONTADORES_PATH, counters);
+  return `a_${String(counters.UltimoIDActor).padStart(3, "0")}`;
+}
+
+async function nuevoIdPelicula() {
+  const counters = await leerJSON(CONTADORES_PATH);
+  counters.UltimoIDPeli += 1;
+  await escribirJSON(CONTADORES_PATH, counters);
+  return `p_${String(counters.UltimoIDPeli).padStart(3, "0")}`;
 }
 
 /* ===================== ACTORES ===================== */
@@ -47,17 +57,18 @@ app.get("/actores/:id", async (req, res) => {
 // POST /actores → crea un nuevo actor
 // Ejemplo de Body que hay que introducir: { "nombre": "Keanu Reeves", "nacimiento": 1964 }
 app.post("/actores", async (req, res) => {
-  const { nombre, nacimiento } = req.body || {};  // Extraemos campos del body
+  const { nombre, nacimiento } = req.body || {};
   if (!nombre || !Number.isInteger(nacimiento)) {
-    // Validación básica: nombre string y nacimiento número entero
     return res.status(400).json({ error: "nombre (string) y nacimiento (int) requeridos" });
   }
   const db = await leerJSON(ACTORES_PATH);
-  const nuevo = { id: nuevoId("a"), nombre, nacimiento }; // Creamos el nuevo objeto
-  db.actores.push(nuevo);                               // Lo añadimos al array
-  await escribirJSON(ACTORES_PATH, db);                 // Guardamos cambios en el fichero
-  res.status(201).json(nuevo);                          // Respuesta 201 Created con el actor creado
+  const id = await nuevoIdActor();   
+  const nuevo = { id, nombre, nacimiento };
+  db.actores.push(nuevo);
+  await escribirJSON(ACTORES_PATH, db);
+  res.status(201).json(nuevo);
 });
+
 
 // PATCH /actores/:id → modifica campos de un actor (parcialmente)
 // Ejemplo de Body que hay que introducir: { "nombre": "Keanu Reeves", "nacimiento": 1964 }
@@ -131,15 +142,16 @@ app.get("/peliculas/:id", async (req, res) => {
 app.post("/peliculas", async (req, res) => {
   const { nombre, anioPublicacion, actores } = req.body || {};
   if (!nombre || !Number.isInteger(anioPublicacion)) {
-    // Validamos que venga título y año entero
     return res.status(400).json({ error: "nombre (string) y anioPublicacion (int) requeridos" });
   }
   const db = await leerJSON(PELIS_PATH);
-  const nueva = { id: nuevoId("p"), nombre, anioPublicacion, actores: Array.isArray(actores) ? actores : [] };
+  const id = await nuevoIdPelicula();   
+  const nueva = { id, nombre, anioPublicacion, actores: Array.isArray(actores) ? actores : [] };
   db.peliculas.push(nueva);
   await escribirJSON(PELIS_PATH, db);
-  res.status(201).json(nueva);  // Respuesta con la película creada
+  res.status(201).json(nueva);
 });
+
 
 // PATCH /peliculas/:id → modifica una película
 // Ejemplo de body: { "nombre": "Nuevo Título", "anioPublicacion": 2020 }
