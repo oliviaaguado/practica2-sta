@@ -1,4 +1,4 @@
-📌 Actores
+ Actores
 1. Listar todos los actores
 curl http://localhost:3000/actores
 
@@ -18,7 +18,7 @@ curl -X PATCH http://localhost:3000/actores/a_003 \
 5. Borrar un actor
 curl -X DELETE http://localhost:3000/actores/a_008
 
-🎬 Películas
+ Películas
 6. Listar todas las películas
 curl http://localhost:3000/peliculas
 

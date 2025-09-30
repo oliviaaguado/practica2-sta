@@ -2,7 +2,7 @@
 const express = require("express");     // Framework para crear el servidor y definir rutas
 const fs = require("fs/promises");      // Módulo de Node.js para leer y escribir ficheros con promesas
 const path = require("path");           // Para construir rutas válidas en Windows/Linux/Mac
-const cors = require("cors");           // Middleware para permitir peticiones desde otros orígenes (ej. tu web)
+const cors = require("cors");           // Middleware para permitir peticiones desde otros orígenes
 
 // Inicializamos la aplicación de Express
 const app = express();
