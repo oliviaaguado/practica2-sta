@@ -7,7 +7,8 @@
       "actores": [
         "a_001",
         "a_002"
-      ]
+      ],
+      "categoria": "musical"
     },
     {
       "id": "p_002",
@@ -16,7 +17,8 @@
       "actores": [
         "a_003",
         "a_004"
-      ]
+      ],
+      "categoria": "ciencia"
     },
     {
       "id": "p_003",
@@ -25,7 +27,8 @@
       "actores": [
         "a_005",
         "a_006"
-      ]
+      ],
+      "categoria": "accion"
     },
     {
       "id": "p_004",
@@ -34,7 +37,8 @@
       "actores": [
         "a_007",
         "a_008"
-      ]
+      ],
+      "categoria": "romance"
     }
   ]
 }
