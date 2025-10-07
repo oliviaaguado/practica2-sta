@@ -8,7 +8,8 @@
         "a_001",
         "a_002"
       ],
-      "categoria": "musical"
+      "categoria": "musical",
+      "portada": "https://upload.wikimedia.org/wikipedia/en/e/e2/Grease_ver2.jpg"
     },
     {
       "id": "p_002",
@@ -18,7 +19,8 @@
         "a_003",
         "a_004"
       ],
-      "categoria": "ciencia"
+      "categoria": "ciencia",
+      "portada": "https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png"
     },
     {
       "id": "p_003",
@@ -28,7 +30,8 @@
         "a_005",
         "a_006"
       ],
-      "categoria": "accion"
+      "categoria": "accion",
+      "portada": "https://upload.wikimedia.org/wikipedia/en/6/6d/The_Terminator.png"
     },
     {
       "id": "p_004",
@@ -38,7 +41,8 @@
         "a_007",
         "a_008"
       ],
-      "categoria": "romance"
+      "categoria": "romance",
+      "portada": "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png"
     }
   ]
 }
